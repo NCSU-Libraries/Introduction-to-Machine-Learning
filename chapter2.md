@@ -1,12 +1,15 @@
 ---
 title       :  Does Money Buy Happiness?
-description : You will learn to create a model using Linear Regression Modelling
+description : You will learn to create a model using Linear Regression Modeling
 
 
 --- type:NormalExercise lang:r xp:100 skills:1 key:4c2e1e4e93
+
 ## Knowing Your Data
 
-You will create a dataset called `emp_data` having two attributes - earnings and s_rating and 20 observations
+In this exercise, you will test whether there is a connection between a person's salary and their happiness level. The first step is to get to know the data we'll be using.
+
+You will create our own dataset called `emp_data` having two attributes - earnings (a person's salary per day) and s_rating (satisfaction level) and 20 observations
 
 `emp_data` = Employee dataset
 
@@ -15,39 +18,22 @@ You will create a dataset called `emp_data` having two attributes - earnings and
 `s_rating` = How satisfied the employee is with his/her wage
 
 From this dataset, we will try to predict a new employee's satisfaction rating when he is paid $200, $400, or $1200 per day.
-So, earnings is the predictor and s_rating is the class we'll predict. This exercise uses just one attribute for prediction and that is employee’s `earnings`. 
 
+So, earnings is the **predictor** and s_rating is the **class** (class= the thing we're trying to predict). This exercise uses just one attribute for prediction and that is employee’s `earnings`. 
 
 The dataset emp_data is a simple and clean dataset. No preprocessing required.
 
-It is machine learning practice to partition dataset for analysis into Training and Test sets.
-
-The training set could be 60 - 70% of the entire dataset while the test set is the percentage remaining.
-The createDataPartition() function that comes with the caret package can be used to split the data. This function is used like so:
-Suppose `myData` is the name of a dataset and I want to predict `class` an attribute in the dataset `myData` .  
-
-inTrain <- createDataPartition(y= myData$class, p=0.7, list=FALSE)
-
-training <- myData[inTrain, ]
-
-test <- myData[-inTrain, ]
-
-`p` is set to `0.7` because we need 70% of the whole data and list is set to FALSE because we don't want the function to return `inTrain` as a list.
-
+Now we will plot it on a graph to explore it further.
 
 *** =instructions
-- Plot `emp_data` with earnings on the x-axis and s_rating on the y-axis. Plot function is used like this: `plot(x, y,  col=y, main="Regression Modelling")` where y determines the color of each point and main contains the title of the plot.
-- Use createDataPartition() function in R to partition your dataset
-- Your training set should be 60% of the entire dataset 
-- Print out the training and test sets  
-- Check the dimension of both datasets to know more about the data
-*** =hint
-- Use `plot()` for the first instruction. 
-- Make sure you have loaded the caret package into your workspace by typing `library(caret)` 
-- type ?createDataPartition to know how to use the createDataPartition() function
-- Make p=0.6 and set list=FALSE
-- To print a variable to the console, simply type the name of the variable on a new line.
-- Use the `dim()` function on training and test set for the fourth instruction
+- Plot `emp_data` with earnings on the x-axis and s_rating on the y-axis. 
+
+- The plot function looks like this: `plot(x, y,  col=y, main="Regression Modeling")` 
+`x` is your independent variable  
+`y` is your dependent variable  
+`col=y` means that the color of the plot is set to the y variable.  
+`main="Regression Modeling" is the title of the plot.
+
 
 *** =pre_exercise_code
 ```{r}
@@ -73,22 +59,12 @@ emp_data  <- data.frame(earnings, s_rating)
 
 emp_data 
 
-dim(emp_data)
-
-# Some exploratory data analyses - plot emp_data
+# Look at the dimensions (number of columns and rows) of this data set. Type dim(emp_data)
 
 
-
-# Partition the data into training and test datasets
-
-inTrain <- 
-
-training <- emp_data[inTrain,]
-
-test <- 
-
-# Print out training and test sets and show the dimensions of each set
+# Plot emp_data with earnings on the x-axis and s_rating on the y-axis. See instructions for how to create a graph with the plot() function.
 ```
+
 
 *** =solution
 ```{r}
@@ -106,15 +82,113 @@ emp_data  <- data.frame(earnings, s_rating)
 
 emp_data 
 
+# Look at the dimensions (number of columns and rows) of this data set. Type dim(emp_data)
+
 dim(emp_data)
 
 
-# Some exploratory data analyses 
-par(cex=.8)
-plot(earnings, s_rating, col=s_rating, main="Regression Modelling")
+# Plot emp_data with earnings on the x-axis and s_rating on the y-axis. See instructions for how to create a graph with the plot() function.
+
+plot(earnings, s_rating, col=s_rating, main="Regression Modeling")
 
 
-# Partition the data into training and test datasets
+```
+
+*** =sct
+```{r}
+# SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
+
+
+test_function("plot",
+              not_called_msg = "You didn't call `plot()` Remember: x = earnings and y = s_rating")
+
+
+test_function("dim",
+              not_called_msg = "You didn't call `dim()`. Remember to put `emp_data` inside of dim()")
+
+
+test_error()
+
+success_msg("Good work!")
+
+```
+
+
+--- type:NormalExercise lang:r xp:100 skills:1 
+
+## Create a Training Set
+
+It is machine learning practice to partition dataset for analysis into Training and Test sets.
+
+The training set could be 60 - 70% of the entire dataset while the test set is the percentage remaining.
+
+The createDataPartition() function that comes with the caret package can be used to split the data. This function is used like so:
+
+Suppose `myData` is the name of a dataset and I want to predict `class`, which is an attribute in the dataset `myData`.  We create a data partition where y = class. In this formula, we type the class variable as `myData$class`, using a `$` between the name of the data set and the variable name we want.
+
+inTrain <- createDataPartition(y= myData$class, p=0.7, list=FALSE)
+
+training <- myData[inTrain, ]
+
+test <- myData[-inTrain, ]
+
+`p` is set to `0.7` because we need 70% of the whole data and list is set to FALSE because we don't want the function to return `inTrain` as a list.
+
+
+*** =instructions
+
+- Use createDataPartition() function in R to partition your dataset. This example may help you: `createDataPartition(y= myData$class, p=0.7, list=FALSE)`
+- Your training set should be 60% of the entire dataset (p=0.6)
+- Print out the training and test sets  
+- Check the dimension of both datasets to know more about the data
+*** =hint
+- type ?createDataPartition and hit Enter in the console to know how to use the createDataPartition() function
+- Make p=0.6 and set list=FALSE
+- To print a variable to the console, simply type the name of the variable on a new line.
+- Use the `dim()` function on training and test set for the fourth instruction
+
+*** =pre_exercise_code
+```{r}
+
+# Loading the required package
+
+library(caret)
+
+# Clean up the environment
+
+earnings <- c(120, 100, 700, 200, 60, 20, 200, 130, 150, 160, 170, 180, 190, 210, 220, 400, 550, 670, 695, 300)
+
+s_rating<- c(50, 60, 80, 75, 50, 70, 75, 60, 50, 65, 70, 71,80, 82, 85, 80, 88, 90, 90, 60)
+
+emp_data  <- data.frame(earnings, s_rating)
+
+```
+
+*** =sample_code
+```{r}
+
+# Partition `emp_data` into training and test datasets.
+
+inTrain <- 
+
+training <- emp_data[inTrain,]
+
+test <- 
+
+# Type the variable names `training`  and `test` to see the contents of those variables.
+
+
+
+# Show the dimensions of the `training` and `test` sets using the dim() function.
+
+
+
+```
+
+*** =solution
+```{r}
+
+# Partition `emp_data` into `training` and `test` datasets.
 
 inTrain <- createDataPartition(y= emp_data$s_rating, p=0.6, list=FALSE)
 
@@ -122,11 +196,11 @@ training <- emp_data[inTrain, ]
 
 test <- emp_data[-inTrain, ]
 
-# Print out training and test sets and show the dimensions of each set
+# Type the variable names `training`  and `test` to see the contents of those variables.
 
-training
 
-test
+
+# Show the dimensions of the `training` and `test` sets
 
 dim(training)
 
@@ -140,8 +214,8 @@ dim(test)
 # SCT written with testwhat: https://github.com/datacamp/testwhat/wiki
 
 
-test_function("plot",
-              not_called_msg = "You didn't call `plot()`")
+test_function("createDataPartition",
+              not_called_msg = "Your createDataPartition function needs some work.`")
 
 #test_object("inTrain")
 test_object("training")
@@ -170,21 +244,23 @@ This model is simply a line. Regression modelling is used to find equations(line
 
 The equation is of the form:
 
-y = a + bx + ei
+`y = a + bx + ei`
 
-y is what we want to predict and x includes all the predictors required to form the model above.
+`y` is what we want to predict and `x` includes all the predictors required to form the model above.
 
-a and b are coefficients determined by the `lm()` function we’ll use shortly. `ei` stands for errors as a result of the factors we did not consider. 
+`a` and `b` are **coefficients** determined by the `lm()` function we’ll use shortly. `ei` stands for errors as a result of the factors we did not consider.  
+
 The best model is one that minimizes ei the most. 
 
-Regression model is easy to implement but it often produces low performance models. This method is useful when the variable involved can be modelled in a linear way.
+A regression model is easy to implement but it often produces low performance models. This method is useful when the variable involved can be modeled in a linear way.
 
-For example, increase in age leads to increase in weight, or increase in age leads to decrease in the number of hairs on head. This cannot be used in showing increase in library visitor per day of the week. This is usually non-linear.
+For example, to show that increase in age leads to increase in weight, or an increase in age leads to decrease in the number of hairs on one's head. This cannot be used in showing increase in library visitor per day of the week, which is usually non-linear.
 
-`lm()` function is used like this: Suppose `myData` is the name of a dataset and I want to predict `class` an attribute in the dataset `myData` using `sex` (another attribute in myData) as my predictor 
+`lm()` function is used like this: Suppose `myData` is the name of a dataset and I want to predict `class` an attribute in the dataset `myData` using `sex` (another attribute in myData) as my predictor:
 
-reg_model <- lm(class, sex, data=myData)
-We can get a and b from reg_model using the coef function:
+`reg_model <- lm(class, sex, data=myData)`
+
+We can get `a` and `b` from `reg_model` using the coef function:
 
 a <- coef(reg_model)[1]
 

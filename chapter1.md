@@ -1,5 +1,5 @@
 ---
-title       : Computer Wins!
+title       : Machine Learning: Opening up the Black Box
 description : A General Introduction to Machine Learning
 attachments :
   slides_link : https://s3.amazonaws.com/assets.datacamp.com/course/teach/slides_example.pdf
@@ -8,13 +8,11 @@ attachments :
 --- type:PlainMultipleChoiceExercise lang:r xp:50 skills:1 key:ef1b76935a
 ## The Buzzword
 
-The term "Machine Learning" has been in town for a while now. It is even being overused by some but to others, it will remain a black box.
-This course will educate you on the idea of Machine Learning, from getting the data to improving the accuracy of the models you will create. 
-Using some examples, we'll see the processes involved in doing "Machine Learning". 
+The term "Machine Learning" has been around for a while now, but to many it remains a mysterious black box. How does it really work? 
 
-This course is for people that want to dive right in and get their hands dirty.
-You should get the hang of this black box at the end of this course.
+This course will teaching you about the process of doing Machine Learning, from getting data to improving the accuracy of the models you will create.  
 
+This course is for people that want to dive right in and get their hands dirty. By the end of the course, you should better understand what's inside the "black box".  
 
 According to Wikipedia, Arthur Samuel in 1959 defined Machine Learning as the subfield of computer science that gives computers the ability to learn without being explicitly programmed.
 This means that machines will be given the ability to make inferences and observation by learning from data. Machine learning is the therefore the science of teaching the machine to identify trends in data and recognize patterns that cannot easily be detected by humans.
@@ -48,13 +46,11 @@ msg_success <- "Exactly! Even I can calculate the next 50 leap years and I'm onl
 test_mc(correct = 2, feedback_msgs = c(msg_bad, msg_success, msg_bad, msg_bad))
 ```
 
-
 --- type:PlainMultipleChoiceExercise lang:r xp:100 skills:1 key:c57adfc430
+
 ## A Model - The Secret Weapon
 
-
-A human can learn the voices of 10 (maybe 100) co-workers and be able to identify them without looking while a machine can learn the voices of over 10,000 people and be able to predict whose voice it is.
-Computer wins!
+A human can learn the voices of 10 (maybe 100) co-workers and be able to identify them without looking. A machine, however, can learn the voices of over 10,000 people and be able to predict whose voice it is.
 
 How?  
 
@@ -69,7 +65,7 @@ Processes involved in Machine Learning include the following:
 - Post-Process (Visualize, Evaluate, Improve Model & Present)
 
 The first two steps are typical for any analysis involving data.
-Creating a model is a critical part of the machine's studies.
+Creating a model is a critical part of machine learning.
 
 A model is an artifact or a formula created by the process of learning from previous data.
 When you plug in historical data into a machine learning algorithm, you get a model.
